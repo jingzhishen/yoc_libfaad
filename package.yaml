@@ -1,0 +1,70 @@
+name: faad
+description: FAAD2是一个开源的MPEG-4和MPEG-2 AAC解码器，它是根据GPLV2许可证授权的
+keywords:
+  - faad
+  - aac decoder, m4a
+  - audio decoder
+  - media
+author:
+  name: jingzhishen
+  email: jingzhishen@126.com
+license: GPLv2
+
+depends:                                       # 该组件依赖其他的组件
+  - minilibc
+
+build_config:
+  include:
+    - src
+    - include
+  cflag: ' -Wno-unused-function '       # C 编译器所需要要的编译参数
+  cxxflag: ''                         # CXX 编译器所需要要的编译参数
+  asmflag: ''                            # 汇编器所需要要参数
+  define:                                      # 宏定义
+    - HAVE_CONFIG_H
+    - FIXED_POINT 
+
+source_file:
+  - "src/bits.c"
+  - "src/cfft.c"
+  - "src/common.c" 
+  - "src/decoder.c"
+  - "src/drc.c"
+  - "src/drm_dec.c"
+  - "src/error.c"  
+  - "src/filtbank.c"
+  - "src/hcr.c" 
+  - "src/huffman.c"
+  - "src/ic_predict.c"
+  - "src/is.c"  
+  - "src/lt_predict.c"
+  - "src/mdct.c"
+  - "src/mp4.c" 
+  - "src/ms.c"  
+  - "src/output.c" 
+  - "src/pns.c" 
+  - "src/ps_dec.c" 
+  - "src/ps_syntax.c"
+  - "src/pulse.c"  
+  - "src/rvlc.c"
+  - "src/sbr_dct.c"
+  - "src/sbr_dec.c"
+  - "src/sbr_e_nf.c"
+  - "src/sbr_fbt.c"
+  - "src/sbr_hfadj.c"
+  - "src/sbr_hfgen.c"
+  - "src/sbr_huff.c"
+  - "src/sbr_qmf.c"
+  - "src/sbr_syntax.c"
+  - "src/sbr_tf_grid.c"
+  - "src/specrec.c"
+  - "src/ssr.c" 
+  - "src/ssr_fb.c" 
+  - "src/ssr_ipqf.c"
+  - "src/syntax.c" 
+  - "src/tns.c"
+
+install:
+  - dest: "include/"
+    source:
+      - "include/*.h"

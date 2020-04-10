@@ -120,9 +120,14 @@ extern "C" {
   #undef ERROR_RESILIENCE
 #endif
 
-#define SBR_DEC
+#ifdef  FAAD_DEC_SBR_ENABLE
+  #define SBR_DEC
 //#define SBR_LOW_POWER
-#define PS_DEC
+#endif
+
+#ifdef  FAAD_DEC_PS_ENABLE
+  #define PS_DEC
+#endif
 
 #ifdef SBR_LOW_POWER
 #undef PS_DEC
@@ -397,7 +402,10 @@ char *strchr(), *strrchr();
 
 #ifndef HAS_LRINTF
 /* standard cast */
-#define lrintf(f) ((int32_t)(f))
+// FIXME: for newlib compile pass
+#ifndef __NEWLIB__
+#define lrintf(f) ((int32_t)(f)) 
+#endif
 #endif
 
 typedef real_t complex_t[2];

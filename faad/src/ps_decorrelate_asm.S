@@ -3,6 +3,8 @@
  *                         qmf_t X_hybrid_left[32][32], qmf_t X_hybrid_right[32][32])
  */
 
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+
 .import memset
 .import g_filter_a
 .import Phi_Fract_Qmf
@@ -642,3 +644,6 @@ ps_decorrelate_asm:
     add             sp, l9
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           ps_decorrelate_asm, .-ps_decorrelate_asm
+
+#endif
+

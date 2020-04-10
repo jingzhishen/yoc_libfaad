@@ -54,7 +54,10 @@ static void passf2neg(const uint16_t ido, const uint16_t l1, const complex_t *cc
                       complex_t *ch, const complex_t *wa);
 static void passf3(const uint16_t ido, const uint16_t l1, const complex_t *cc,
                    complex_t *ch, const complex_t *wa1, const complex_t *wa2, const int8_t isign);
-#ifndef FAAD_DSPV2
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+extern void passf4pos_asm(const uint16_t ido, const uint16_t l1, const complex_t *cc, complex_t *ch,
+                      const complex_t *wa1, const complex_t *wa2, const complex_t *wa3);
+#else
 static void passf4pos(const uint16_t ido, const uint16_t l1, const complex_t *cc, complex_t *ch,
                       const complex_t *wa1, const complex_t *wa2, const complex_t *wa3);
 #endif
@@ -301,7 +304,7 @@ static void passf3(const uint16_t ido, const uint16_t l1, const complex_t *cc,
 }
 
 
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
 static void passf4pos(const uint16_t ido, const uint16_t l1, const complex_t *cc,
                       complex_t *ch, const complex_t *wa1, const complex_t *wa2,
                       const complex_t *wa3)
@@ -722,7 +725,7 @@ static INLINE void cfftf1pos(uint16_t n, complex_t *c, complex_t *ch,
             ix2 = iw + ido;
             ix3 = ix2 + ido;
 
-#ifdef FAAD_DSPV2
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
             if (na == 0)
                 passf4pos_asm((const uint16_t)ido, (const uint16_t)l1, (const complex_t*)c, ch, &wa[iw], &wa[ix2], &wa[ix3]);
             else

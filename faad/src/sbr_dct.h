@@ -25,28 +25,32 @@
 ** Commercial non-GPL licensing of this software is possible.
 ** For more info contact Nero AG through Mpeg4AAClicense@nero.com.
 **
-** $Id: mp4.h,v 1.28 2009/02/05 00:51:03 menno Exp $
+** $Id: sbr_dct.h,v 1.19 2007/11/01 12:33:34 menno Exp $
 **/
 
-#ifndef __MP4_H__
-#define __MP4_H__
+#ifndef __SBR_DCT_H__
+#define __SBR_DCT_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "neaacdec.h"
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+void dct4_kernel_asm(real_t * in_real, real_t * in_imag, real_t * out_real, real_t * out_imag);
+#else
+void dct4_kernel(real_t * in_real, real_t * in_imag, real_t * out_real, real_t * out_imag);
+#endif
 
-int8_t AudioSpecificConfig2(uint8_t *pBuffer,
-                            uint32_t buffer_size,
-                            mp4AudioSpecificConfig *mp4ASC,
-                            program_config *pce, uint8_t short_form);
- 
-int8_t AudioSpecificConfigFromBitfile(bitfile *ld,
-                                      mp4AudioSpecificConfig *mp4ASC,
-                                      program_config *pce, uint32_t bsize, uint8_t short_form);
+void DCT3_32_unscaled(real_t *y, real_t *x);
+void DCT4_32(real_t *y, real_t *x);
+void DST4_32(real_t *y, real_t *x);
+void DCT2_32_unscaled(real_t *y, real_t *x);
+void DCT4_16(real_t *y, real_t *x);
+void DCT2_16_unscaled(real_t *y, real_t *x);
+
 
 #ifdef __cplusplus
 }
 #endif
 #endif
+

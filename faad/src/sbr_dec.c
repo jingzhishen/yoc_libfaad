@@ -482,7 +482,7 @@ uint8_t sbrDecodeCoupleFrame(sbr_info *sbr, real_t *left_chan, real_t *right_cha
     {
         sbr_qmf_synthesis_32(sbr, sbr->qmfs[0], X, left_chan);
     } else {
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         sbr_qmf_synthesis_64(sbr, sbr->qmfs[0], X, left_chan);
 #else
         sbr_qmf_synthesis_64_asm(sbr, sbr->qmfs[0], X, left_chan);
@@ -495,7 +495,7 @@ uint8_t sbrDecodeCoupleFrame(sbr_info *sbr, real_t *left_chan, real_t *right_cha
     {
         sbr_qmf_synthesis_32(sbr, sbr->qmfs[1], X, right_chan);
     } else {
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         sbr_qmf_synthesis_64(sbr, sbr->qmfs[1], X, right_chan);
 #else
         sbr_qmf_synthesis_64_asm(sbr, sbr->qmfs[1], X, right_chan);
@@ -573,7 +573,7 @@ uint8_t sbrDecodeSingleFrame(sbr_info *sbr, real_t *channel,
     {
         sbr_qmf_synthesis_32(sbr, sbr->qmfs[0], X, channel);
     } else {
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         sbr_qmf_synthesis_64(sbr, sbr->qmfs[0], X, channel);
 #else
         sbr_qmf_synthesis_64_asm(sbr, sbr->qmfs[0], X, channel);
@@ -681,7 +681,7 @@ uint8_t sbrDecodeSingleFramePS(sbr_info *sbr, real_t *left_channel, real_t *righ
         sbr_qmf_synthesis_32(sbr, sbr->qmfs[0], X_left, left_channel);
         sbr_qmf_synthesis_32(sbr, sbr->qmfs[1], X_right, right_channel);
     } else {
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         sbr_qmf_synthesis_64(sbr, sbr->qmfs[0], X_left, left_channel);
         sbr_qmf_synthesis_64(sbr, sbr->qmfs[1], X_right, right_channel);
 #else

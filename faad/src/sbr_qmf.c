@@ -149,7 +149,7 @@ void sbr_qmf_analysis_32(sbr_info *sbr, qmfa_info *qmfa, const real_t *input,
         in_real[31] = -u[33];
 
         // dct4_kernel is DCT_IV without reordering which is done before and after FFT
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         dct4_kernel(in_real, in_imag, out_real, out_imag);
 #else
         dct4_kernel_asm(in_real, in_imag, out_real, out_imag);
@@ -538,7 +538,7 @@ void sbr_qmf_synthesis_64(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][6
 
 
         // dct4_kernel is DCT_IV without reordering which is done before and after FFT
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         dct4_kernel(in_real1, in_imag1, out_real1, out_imag1);
         dct4_kernel(in_real2, in_imag2, out_real2, out_imag2);
 #else

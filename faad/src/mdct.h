@@ -25,31 +25,28 @@
 ** Commercial non-GPL licensing of this software is possible.
 ** For more info contact Nero AG through Mpeg4AAClicense@nero.com.
 **
-** $Id: sbr_qmf.h,v 1.25 2007/11/01 12:33:36 menno Exp $
+** $Id: mdct.h,v 1.30 2007/11/01 12:33:31 menno Exp $
 **/
 
-#ifndef __SBR_QMF_H__
-#define __SBR_QMF_H__
+#ifndef __MDCT_H__
+#define __MDCT_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-qmfa_info *qmfa_init(uint8_t channels);
-void qmfa_end(qmfa_info *qmfa);
-qmfs_info *qmfs_init(uint8_t channels);
-void qmfs_end(qmfs_info *qmfs);
 
-void sbr_qmf_analysis_32(sbr_info *sbr, qmfa_info *qmfa, const real_t *input,
-                         qmf_t X[MAX_NTSRHFG][64], uint8_t offset, uint8_t kx);
-void sbr_qmf_synthesis_32(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64],
-                          real_t *output);
-void sbr_qmf_synthesis_64(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64],
-                          real_t *output);
+mdct_info *faad_mdct_init(uint16_t N);
+void faad_mdct_end(mdct_info *mdct);
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+void faad_imdct_asm(mdct_info *mdct, real_t *X_in, real_t *X_out);
+#else
+void faad_imdct(mdct_info *mdct, real_t *X_in, real_t *X_out);
+#endif
+void faad_mdct(mdct_info *mdct, real_t *X_in, real_t *X_out);
 
 
 #ifdef __cplusplus
 }
 #endif
 #endif
-

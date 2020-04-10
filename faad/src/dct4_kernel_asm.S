@@ -2,6 +2,8 @@
  *void dct4_kernel(real_t * in_real, real_t * in_imag, real_t * out_real, real_t * out_imag)
  */
 
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+
 .import g_bit_rev_tab
 .import dct4_64_tab
 
@@ -120,3 +122,6 @@ dct4_kernel_asm:
 .L7:
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           dct4_kernel_asm, .-dct4_kernel_asm
+
+#endif
+

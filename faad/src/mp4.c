@@ -126,8 +126,8 @@ int8_t AudioSpecificConfigFromBitfile(bitfile *ld,
                             program_config *pce, uint32_t buffer_size, uint8_t short_form)
 {
     int8_t result = 0;
-    uint32_t startpos = faad_get_processed_bits(ld);
 #ifdef SBR_DEC
+    uint32_t startpos = faad_get_processed_bits(ld);
     int8_t bits_to_decode = 0;
 #endif
 

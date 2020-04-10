@@ -25,24 +25,32 @@
 ** Commercial non-GPL licensing of this software is possible.
 ** For more info contact Nero AG through Mpeg4AAClicense@nero.com.
 **
-** $Id: sbr_dct.h,v 1.19 2007/11/01 12:33:34 menno Exp $
+** $Id: sbr_qmf.h,v 1.25 2007/11/01 12:33:36 menno Exp $
 **/
 
-#ifndef __SBR_DCT_H__
-#define __SBR_DCT_H__
+#ifndef __SBR_QMF_H__
+#define __SBR_QMF_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void dct4_kernel(real_t * in_real, real_t * in_imag, real_t * out_real, real_t * out_imag);
+qmfa_info *qmfa_init(uint8_t channels);
+void qmfa_end(qmfa_info *qmfa);
+qmfs_info *qmfs_init(uint8_t channels);
+void qmfs_end(qmfs_info *qmfs);
 
-void DCT3_32_unscaled(real_t *y, real_t *x);
-void DCT4_32(real_t *y, real_t *x);
-void DST4_32(real_t *y, real_t *x);
-void DCT2_32_unscaled(real_t *y, real_t *x);
-void DCT4_16(real_t *y, real_t *x);
-void DCT2_16_unscaled(real_t *y, real_t *x);
+void sbr_qmf_analysis_32(sbr_info *sbr, qmfa_info *qmfa, const real_t *input,
+                         qmf_t X[MAX_NTSRHFG][64], uint8_t offset, uint8_t kx);
+void sbr_qmf_synthesis_32(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64],
+                          real_t *output);
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+void sbr_qmf_synthesis_64_asm(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64],
+                          real_t *output);
+#else
+void sbr_qmf_synthesis_64(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64],
+                          real_t *output);
+#endif
 
 
 #ifdef __cplusplus

@@ -6,6 +6,8 @@
  *      real_t *X_out)
  */
 
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+
 .import imdct_Z1
 
     .section        .text.faad_imdct_asm,"ax",@progbits
@@ -149,3 +151,6 @@ faad_imdct_asm:
 
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           faad_imdct_asm, .-faad_imdct_asm
+
+#endif
+

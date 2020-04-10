@@ -25,22 +25,27 @@
 ** Commercial non-GPL licensing of this software is possible.
 ** For more info contact Nero AG through Mpeg4AAClicense@nero.com.
 **
-** $Id: mdct.h,v 1.30 2007/11/01 12:33:31 menno Exp $
+** $Id: mp4.h,v 1.28 2009/02/05 00:51:03 menno Exp $
 **/
 
-#ifndef __MDCT_H__
-#define __MDCT_H__
+#ifndef __MP4_H__
+#define __MP4_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+#include "bits.h"
+#include "neaacdec.h"
 
-mdct_info *faad_mdct_init(uint16_t N);
-void faad_mdct_end(mdct_info *mdct);
-void faad_imdct(mdct_info *mdct, real_t *X_in, real_t *X_out);
-void faad_mdct(mdct_info *mdct, real_t *X_in, real_t *X_out);
-
+int8_t AudioSpecificConfig2(uint8_t *pBuffer,
+                            uint32_t buffer_size,
+                            mp4AudioSpecificConfig *mp4ASC,
+                            program_config *pce, uint8_t short_form);
+ 
+int8_t AudioSpecificConfigFromBitfile(bitfile *ld,
+                                      mp4AudioSpecificConfig *mp4ASC,
+                                      program_config *pce, uint32_t bsize, uint8_t short_form);
 
 #ifdef __cplusplus
 }

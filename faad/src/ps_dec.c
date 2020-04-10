@@ -184,8 +184,13 @@ static void map34indexto20(int8_t *index, uint8_t bins);
 #endif
 static void ps_data_decode(ps_info *ps) __attribute__((noinline));
 //static void ps_data_decode(ps_info *ps);
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+extern void ps_decorrelate_asm(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][64],
+                           qmf_t X_hybrid_left[32][32], qmf_t X_hybrid_right[32][32]) __attribute__((noinline));
+#else
 static void ps_decorrelate(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][64],
                            qmf_t X_hybrid_left[32][32], qmf_t X_hybrid_right[32][32]) __attribute__((noinline));
+#endif
 static void ps_mix_phase(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][64],
                          qmf_t X_hybrid_left[32][32], qmf_t X_hybrid_right[32][32]) __attribute__((noinline));
 
@@ -2009,7 +2014,7 @@ uint8_t ps_decode(ps_info *ps, qmf_t X_left[38][64], qmf_t X_right[38][64])
         ps->use34hybrid_bands, ps->numTimeSlotsRate);
 
     /* decorrelate mono signal */
-#ifdef FAAD_DSPV2
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
     ps_decorrelate_asm(ps, X_left, X_right, X_hybrid_left, X_hybrid_right);
 #else
     ps_decorrelate(ps, X_left, X_right, X_hybrid_left, X_hybrid_right);

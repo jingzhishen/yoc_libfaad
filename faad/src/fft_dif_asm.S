@@ -2,6 +2,8 @@
  *void fft_dif(real_t * Real, real_t * Imag)
  */
 
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+
 .import w_array_real
 .import w_array_imag
 
@@ -316,3 +318,6 @@ fft_dif_asm:
 .L20:
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           fft_dif_asm, .-fft_dif_asm
+
+#endif
+

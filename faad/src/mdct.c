@@ -119,7 +119,7 @@ void faad_mdct_end(mdct_info *mdct)
     }
 }
 
-#ifdef FAAD_DSPV2
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
 ALIGN complex_t imdct_Z1[512];
 #endif
 

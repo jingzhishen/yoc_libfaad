@@ -8,6 +8,7 @@
  *      const complex_t *wa2,
  *      const complex_t *wa3)
  */
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
 
     .section        .text.passf4pos_asm,"ax",@progbits
     .align          2
@@ -157,3 +158,7 @@ passf4pos_asm:
     addi            sp, sp, 4
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           passf4pos_asm, .-passf4pos_asm
+
+#endif
+
+

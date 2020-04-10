@@ -2,6 +2,8 @@
  *void sbr_qmf_synthesis_64(sbr_info *sbr, qmfs_info *qmfs, qmf_t X[MAX_NTSRHFG][64], real_t *output)
  */
 
+#if ((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM))
+
 .import qmf_c
 .import dct4_kernel_asm
 
@@ -181,3 +183,6 @@ sbr_qmf_synthesis_64_asm:
     addi            sp, sp, 1040
     pop             l0, l1, l2, l3, l4, l5, l6, l7, l8, l9, lr
     .size           sbr_qmf_synthesis_64_asm, .-sbr_qmf_synthesis_64_asm
+
+#endif
+

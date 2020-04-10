@@ -127,7 +127,7 @@ static INLINE void imdct_long(fb_info *fb, real_t *in_data, real_t *out_data, ui
         break;
     }
 
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
     faad_imdct(mdct, in_data, out_data);
 #else
     faad_imdct_asm(mdct, in_data, out_data);
@@ -135,7 +135,7 @@ static INLINE void imdct_long(fb_info *fb, real_t *in_data, real_t *out_data, ui
 
 #else
 
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
     faad_imdct(fb->mdct2048, in_data, out_data);
 #else
     faad_imdct_asm(fb->mdct2048, in_data, out_data);
@@ -272,7 +272,7 @@ void ifilter_bank(fb_info *fb, uint8_t window_sequence, uint8_t window_shape,
 
     case EIGHT_SHORT_SEQUENCE:
         /* perform iMDCT for each short block */
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
         faad_imdct(fb->mdct256, freq_in+0*nshort, transf_buf+2*nshort*0);
         faad_imdct(fb->mdct256, freq_in+1*nshort, transf_buf+2*nshort*1);
         faad_imdct(fb->mdct256, freq_in+2*nshort, transf_buf+2*nshort*2);

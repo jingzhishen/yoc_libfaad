@@ -83,7 +83,7 @@ static INLINE void imdct_ssr(fb_info *fb, real_t *in_data,
         break;
     }
 
-#ifndef FAAD_DSPV2
+#if (!((defined(__ck804ef__) || defined(__ck805ef__)) && defined(FAAD_CSKY_ASM)))
     faad_imdct(mdct, in_data, out_data);
 #else
     faad_imdct_asm(mdct, in_data, out_data);

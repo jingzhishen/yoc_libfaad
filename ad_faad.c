@@ -38,10 +38,20 @@ static int _faad_open(struct ad_faad_priv *priv, uint8_t *extradata, size_t extr
 
         value = byte_r16be(extradata);
         /* syncword */
-        if ((value & 0xfff0) != 0xfff0)
-            rc = faacDecInit2(handle, extradata, extradata_size, &priv->sample_rate, &priv->channels);
-        else
+        if ((value & 0xfff0) != 0xfff0) {
+            m4a_cnf_t m4ac;
+            uint8_t adts_hdr[ADTS_HDR_SIZE];
+
+            rc = m4a_decode_asc(&m4ac, extradata, extradata_size);
+            CHECK_RET_TAG_WITH_GOTO(rc == 0, err);
+
+            rc = adts_hdr_encode(&m4ac, adts_hdr, 64);
+            CHECK_RET_TAG_WITH_GOTO(rc == 0, err);
+
+            rc = faacDecInit(handle, adts_hdr, ADTS_HDR_SIZE, &priv->sample_rate, &priv->channels);
+        } else {
             rc = faacDecInit(handle, extradata, extradata_size, &priv->sample_rate, &priv->channels);
+        }
         CHECK_RET_TAG_WITH_GOTO(rc == 0, err);
         priv->inited = 1;
     }

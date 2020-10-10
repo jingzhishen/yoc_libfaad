@@ -95,7 +95,7 @@ depends:
 #   libpath:                               # 指定静态库所在的路径（相对于该组件路径）
 #     - libs                               #   -Llibs
 build_config:
-  cflag: '-Wno-unused-function'
+  cflag: '-g -O2 -Wno-unused-function'
   define:
     - HAVE_CONFIG_H
     - FIXED_POINT

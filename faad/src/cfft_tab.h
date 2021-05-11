@@ -37,7 +37,7 @@ extern "C" {
 
 #ifdef FIXED_POINT
 
-ALIGN static const complex_t cfft_tab_512[] =
+ALIGN static const complex_t cfft_tab_512[] __attribute__((section(".tcm1")))  =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.999924719333649), FRAC_CONST(0.012271538376808) },
@@ -554,7 +554,7 @@ ALIGN static const complex_t cfft_tab_512[] =
 };
 
 #ifdef ALLOW_SMALL_FRAMELENGTH
-ALIGN static const complex_t cfft_tab_480[] =
+ALIGN static const complex_t cfft_tab_480[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.999914348125458), FRAC_CONST(0.013089596293867) },
@@ -1039,7 +1039,7 @@ ALIGN static const complex_t cfft_tab_480[] =
 };
 #endif
 
-ALIGN static const complex_t cfft_tab_64[] =
+ALIGN static const complex_t cfft_tab_64[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.995184719562531), FRAC_CONST(0.098017141222954) },
@@ -1108,7 +1108,7 @@ ALIGN static const complex_t cfft_tab_64[] =
 };
 
 #ifdef ALLOW_SMALL_FRAMELENGTH
-ALIGN static const complex_t cfft_tab_60[] =
+ALIGN static const complex_t cfft_tab_60[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.994521915912628), FRAC_CONST(0.104528464376926) },
@@ -1175,7 +1175,7 @@ ALIGN static const complex_t cfft_tab_60[] =
 
 #ifdef LD_DEC
 
-ALIGN static const complex_t cfft_tab_256[] =
+ALIGN static const complex_t cfft_tab_256[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.999698817729950), FRAC_CONST(0.024541229009628) },
@@ -1436,7 +1436,7 @@ ALIGN static const complex_t cfft_tab_256[] =
 };
 
 #ifdef ALLOW_SMALL_FRAMELENGTH
-ALIGN static const complex_t cfft_tab_240[] =
+ALIGN static const complex_t cfft_tab_240[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.999657332897186), FRAC_CONST(0.026176949962974) },
@@ -1683,7 +1683,7 @@ ALIGN static const complex_t cfft_tab_240[] =
 
 #endif
 
-ALIGN static const complex_t cfft_tab_128[] =
+ALIGN static const complex_t cfft_tab_128[] __attribute__((section(".tcm1"))) =
 {
     { FRAC_CONST(1.000000000000000), FRAC_CONST(0.000000000000000) },
     { FRAC_CONST(0.998795449733734), FRAC_CONST(0.049067676067352) },

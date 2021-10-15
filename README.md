@@ -8,8 +8,8 @@ FAAD2是一个开源的MPEG-4和MPEG-2 AAC解码器，它是根据GPLV2许可证
 
 ## 如何在YoC平台下编译使用
 
-- 1. 将faad编解码库拷贝到YoC components文件夹下
-- 2. 修改components/av/avcodec/avcodec_all.c，添加如下代码：
+- 1、将faad编解码库拷贝到YoC components文件夹下
+- 2、修改components/av/avcodec/avcodec_all.c，添加如下代码：
 
 ```c
 /**
@@ -23,7 +23,7 @@ int ad_register_faad()
 }
 ```
 
-- 3. 修改components/av/include/avcodec/avcodec_all.h，修改ad_register_all函数，加入faad解码支持，代码如下：
+- 3、修改components/av/include/avcodec/avcodec_all.h，修改ad_register_all函数，加入faad解码支持，代码如下：
 
 ```c
 static inline int ad_register_all()
@@ -38,14 +38,14 @@ static inline int ad_register_all()
 }
 ```
 
-- 4. 修改components/av/package.yaml，将ad_faad.c加入到source_file标记下进行编译：
+- 4、修改components/av/package.yaml，将ad_faad.c加入到source_file标记下进行编译：
 
 ```c
 source_file:
   - ../faad/ad_faad.c
 ```
 
-- 5. 修改solutions/tg6101_cpu1_demo/package.yaml，需加入如下配置项：
+- 5、修改solutions/tg6101_cpu1_demo/package.yaml，需加入如下配置项：
 
 ```c
 #depends段增加组件依赖
@@ -60,9 +60,9 @@ def_config:
 ## 如何在Linux平台(media_service仓库)下编译使用
 
 Linux下编译采用cmake构建系统(不同于YoC平台)
-- 1. Linux下编译前三步同YoC平台下编译
+- 1、Linux下编译前三步同YoC平台下编译
 
-- 2. 修改components/av/CMakeLists.txt，包含faad组件头文件路径及将ad_faad.c加入源文件列表(LIBSOURCE标记)中进行编译并开启faad编译宏配置：
+- 2、修改components/av/CMakeLists.txt，包含faad组件头文件路径及将ad_faad.c加入源文件列表(LIBSOURCE标记)中进行编译并开启faad编译宏配置：
 ```c
 INCLUDE_DIRECTORIES(../faad/include)
 
@@ -73,11 +73,11 @@ SET(LIBSOURCE
     ../faad/ad_faad.c
 ```
 
-- 3. 修改media_service根目录下的CMakeLists.txt，编译包含faad组件：
+- 3、修改media_service根目录下的CMakeLists.txt，编译包含faad组件：
 ```c
 ADD_SUBDIRECTORY(components/faad)
 ```
-- 4. 修改solutions/media_service/CMakeLists.txt，链接时包含faad库：
+- 4、修改solutions/media_service/CMakeLists.txt，链接时包含faad库：
 ```c
 LINK_LIBRARIES(av
                uservice
@@ -101,12 +101,5 @@ LINK_LIBRARIES(av
                pthread
 )
 ```
-
-
-
-
-
-
-
 
 

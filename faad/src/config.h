@@ -25,7 +25,7 @@
 #define HAVE_GETPWUID 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#define HAVE_INTTYPES_H 0
+#define HAVE_INTTYPES_H 1
 
 /* Define if you have the IOKit API */
 /* #undef HAVE_IOKIT_IOKITLIB_H */
@@ -34,7 +34,7 @@
 #define HAVE_LIMITS_H 1
 
 /* Define if you have C99's lrintf function. */
-#define HAVE_LRINTF 0
+#define HAVE_LRINTF 1
 
 /* Define to 1 if you have the <mathf.h> header file. */
 /* #undef HAVE_MATHF_H */

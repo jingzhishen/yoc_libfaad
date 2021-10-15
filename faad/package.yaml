@@ -95,8 +95,8 @@ build_config:
     - HAVE_CONFIG_H
     - FIXED_POINT
     - FAAD_CSKY_ASM
-  #  - FAAD_DEC_SBR_ENABLE
-  #  - FAAD_DEC_PS_ENABLE
+    - FAAD_DEC_SBR_ENABLE
+    - FAAD_DEC_PS_ENABLE
   include:
     - include
   internal_include:
@@ -149,7 +149,6 @@ source_file:
   - "src/mdct_asm.S"
   - "src/ps_decorrelate_asm.S"
   - "src/sbr_qmf_synthesis_64_asm.S"
-  - "ad_faad.c"
 
 ## 第五部分：配置信息
 # def_config:                              # 组件的可配置项

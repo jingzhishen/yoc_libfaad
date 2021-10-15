@@ -39,7 +39,6 @@ extern "C" {
 #  include "config.h"
 #endif
 
-#include <aos/kernel.h>
 #include "neaacdec.h"
 
 #if 1
@@ -403,8 +402,10 @@ char *strchr(), *strrchr();
 #ifndef HAS_LRINTF
 /* standard cast */
 // FIXME: for newlib compile pass
+#ifndef __linux__
 #ifndef __NEWLIB__
 #define lrintf(f) ((int32_t)(f)) 
+#endif
 #endif
 #endif
 
@@ -435,8 +436,8 @@ int8_t can_decode_ot(const uint8_t object_type);
 void *faad_malloc(size_t size);
 void faad_free(void *b);
 #else
-#define faad_malloc(s)  aos_malloc(s)
-#define faad_free(p)    aos_free(p)
+#define faad_malloc(s)  malloc(s)
+#define faad_free(p)    free(p)
 #endif
 
 //#define PROFILE

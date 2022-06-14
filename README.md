@@ -9,43 +9,24 @@ FAAD2是一个开源的MPEG-4和MPEG-2 AAC解码器，它是根据GPLV2许可证
 ## 如何在YoC平台下编译使用
 
 - 1、将faad编解码库拷贝到YoC components文件夹下
-- 2、修改components/av/avcodec/avcodec_all.c，添加如下代码：
+- 2、在main函数中通过调用ad_register_faad接口注册解码器(调用播放器接口之前)，如修改solutions/xxx_demo/app/src/app_main.c，添加如下代码：
 
 ```c
-/**
- * @brief  regist ad for faad
- * @return 0/-1
- */
-int ad_register_faad()
+extern int ad_register_faad();
+int main(int argc, char *argv[])
 {
-    extern struct ad_ops ad_ops_faad;
-    return ad_ops_register(&ad_ops_faad);
+    board_yoc_init();
+    LOGI(TAG, "build time: %s, %s", __DATE__, __TIME__);
+    ad_register_faad();
+
+    cli_reg_cmd_xplayer();
+    event_subscribe(EVENT_NETMGR_GOT_IP, network_event, NULL);
+    event_subscribe(EVENT_NETMGR_NET_DISCON, network_event, NULL); 
+    aos_loop_run();
 }
 ```
 
-- 3、修改components/av/include/avcodec/avcodec_all.h，修改ad_register_all函数，加入faad解码支持，代码如下：
-
-```c
-static inline int ad_register_all()
-{
-    ...
-
-#if defined(CONFIG_DECODER_FAAD)
-    REGISTER_DECODER(FAAD, faad);
-#endif
-
-    return 0;
-}
-```
-
-- 4、修改components/av/package.yaml，将ad_faad.c加入到source_file标记下进行编译：
-
-```c
-source_file:
-  - ../faad/ad_faad.c
-```
-
-- 5、修改solutions/tg6101_cpu1_demo/package.yaml，需加入如下配置项：
+- 3、修改solutions/xxx_demo/package.yaml，需加入如下配置项：
 
 ```c
 #depends段增加组件依赖

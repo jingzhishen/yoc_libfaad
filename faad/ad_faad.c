@@ -9,6 +9,7 @@
 #include "avformat/adts_rw.h"
 #include "avcodec/ad_cls.h"
 #include "faad.h"
+#include "avcodec/ad.h"
 
 #define TAG                    "ad_faad"
 
@@ -187,6 +188,15 @@ const struct ad_ops ad_ops_faad = {
     .reset          = _ad_faad_reset,
     .close          = _ad_faad_close,
 };
+
+/**
+ * @brief  regist ad for faad
+ * @return 0/-1
+ */
+int ad_register_faad()
+{
+    return ad_ops_register(&ad_ops_faad);
+}
 
 #endif
 

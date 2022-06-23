@@ -33,9 +33,6 @@ int main(int argc, char *argv[])
 depends:
   - faad: v7.4.0
 
-#宏定义段使能faad解码
-def_config:
-  CONFIG_DECODER_FAAD: 1
 ```
 
 ## 如何在Linux平台(media_service仓库)下编译使用
